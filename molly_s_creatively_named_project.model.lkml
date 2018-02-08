@@ -41,19 +41,11 @@ explore: orders {
 }
 
 explore: inventory_items {
-join: Womens {
+join: products {
     from:  products
-    view_label: "Women's Products"
-    sql_on:  ${inventory_items.product_id}=${Womens.id} ;;
+    sql_on:  ${inventory_items.product_id}=${products.id} ;;
     relationship: many_to_one
 
 }
-  join: Mens {
-    from:  products
-    view_label: "Men's Products"
-    sql_on:  ${inventory_items.product_id}=${Mens.id} ;;
-      relationship: many_to_one
 
-
-}
 }

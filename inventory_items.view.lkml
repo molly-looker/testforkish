@@ -64,7 +64,7 @@ view: inventory_items {
   measure: count_CK {
     type: count
     filters: {
-      field: Womens.brand
+      field: products.brand
       value: "Calvin Klein Jeans"
   }
     drill_fields: [products.product_id, products.item_name]
