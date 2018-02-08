@@ -60,6 +60,16 @@ view: inventory_items {
     drill_fields: [products.item_name]
   }
 
+  measure: count_brands_women {
+    type:  count_distinct
+    sql: womens_products.brands ;;
+  }
+
+  measure: count_brands_men {
+    type:  count_distinct
+    sql: mens_products.brands ;;
+  }
+
 
   measure: count_CK_womens {
     type: count
