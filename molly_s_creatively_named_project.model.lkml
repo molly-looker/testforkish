@@ -25,7 +25,6 @@ explore: users {
 
   }
 
-
 }
 
 explore: orders {
