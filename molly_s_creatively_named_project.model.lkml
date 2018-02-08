@@ -1,7 +1,7 @@
 connection: "thelook"
 label: "The Look"
 include: "*.view.lkml"
-include: "*.dashboard.lkml"
+include: "*.dashboard.lookml"
 
 datagroup: molly_datagroup {
   max_cache_age: "4 hour"
@@ -41,11 +41,16 @@ explore: orders {
 }
 
 explore: inventory_items {
-join: products {
-    from:  products
-    sql_on:  ${inventory_items.product_id}=${products.id} ;;
+  join: womens_products {
+    from: products
+    sql_on:  ${inventory_items.product_id} = ${womens_products.id} AND
+              ${womens_products.department} = "Women" ;;
+    relationship: many_to_one
+  }
+  join: mens_products {
+    from: products
+    sql_on:  ${inventory_items.product_id} = ${womens_products.id} AND ${mens_products.department} = "Men" ;;
     relationship: many_to_one
 
-}
-
+  }
 }
