@@ -26,14 +26,20 @@ view: orders {
     sql: ${TABLE}.status ;;
   }
 
+  dimension: is_complete{
+    type: yesno
+    sql: ${status} = 'complete' ;;
+  }
+
   dimension: user_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.user_id ;;
+    drill_fields: [users.first_name, users.last_name]
   }
 
   measure: count {
     type: count
-    drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count]
+    drill_fields: [id, users.name, order_items.count]
   }
 }

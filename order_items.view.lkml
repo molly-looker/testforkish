@@ -9,13 +9,12 @@ view: order_items {
 
   dimension: inventory_item_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.inventory_item_id ;;
   }
 
   dimension: order_id {
     type: number
-    # hidden: yes
     sql: ${TABLE}.order_id ;;
   }
 
@@ -36,10 +35,23 @@ view: order_items {
   dimension: sale_price {
     type: number
     sql: ${TABLE}.sale_price ;;
+    value_format_name: usd_0
   }
 
   measure: count {
     type: count
-    drill_fields: [id, inventory_items.id, orders.id]
+    drill_fields: [orders.*]
   }
+  measure: max_sale_price {
+    type: max
+    sql: ${TABLE}.sale_price ;;
+    drill_fields: [orders.id, order_items.sale_price]
+  }
+
+  measure: sum_sale_price {
+    type:  sum
+    sql:  ${TABLE}.sale_price ;;
+    drill_fields: [orders.id, order_items.sale_price]
+  }
+
 }

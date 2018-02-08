@@ -12,6 +12,15 @@ view: users {
     sql: ${TABLE}.age ;;
   }
 
+  dimension: age_tier {
+    label: "Age Groupings"
+    description: "Ages by Tier"
+    type: tier
+    sql:  ${TABLE}.age ;;
+    tiers: [10, 50, 100]
+    style: integer
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
@@ -42,19 +51,16 @@ view: users {
     sql: ${TABLE}.email ;;
   }
 
-  dimension: first_name {
+  dimension: name {
+    label: "Full Name"
+    description: "First and Last Name"
     type: string
-    sql: ${TABLE}.first_name ;;
+    sql: CONCAT(${TABLE}.first_name ||" " || ${TABLE}.last_name);;
   }
 
   dimension: gender {
     type: string
     sql: ${TABLE}.gender ;;
-  }
-
-  dimension: last_name {
-    type: string
-    sql: ${TABLE}.last_name ;;
   }
 
   dimension: state {
@@ -72,12 +78,22 @@ view: users {
     drill_fields: [detail*]
   }
 
+  measure: count_cali {
+    label: "Count Cailfornia"
+    description: "Count of Users in California"
+    type:  count
+    filters: {
+      field: users.state
+      value: "California"
+    }
+    drill_fields: [users.id, users.state, users.count]
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
       id,
-      last_name,
-      first_name,
+      name,
       events.count,
       orders.count,
       user_data.count

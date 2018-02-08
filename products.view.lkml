@@ -22,6 +22,18 @@ view: products {
     sql: ${TABLE}.department ;;
   }
 
+  dimension: dept {
+    label: "Department by Gender"
+    description: "Products by Department (Gender)"
+    case: {
+      when: {
+        sql: ${TABLE}.department="Women";;
+        label: "Lady Clothes"
+      }
+      else: "Dude Clothes"
+    }
+  }
+
   dimension: item_name {
     type: string
     sql: ${TABLE}.item_name ;;
@@ -45,5 +57,25 @@ view: products {
   measure: count {
     type: count
     drill_fields: [id, item_name, inventory_items.count]
+  }
+
+  measure: sum_retail {
+    label: "Sum Retail Cost"
+    description: "Sum of Retail Cost Per Inventory Item"
+    type:  sum_distinct
+    sql:  ${TABLE}.retail_cost ;;
+    drill_fields: [id, products.retail_cost]
+  }
+
+  measure: min_retail {
+    type:  min
+    sql:  ${TABLE}.retail_cost ;;
+    drill_fields: [id, products.retail_cost]
+  }
+
+  measure: avg_retail {
+    type:  average
+    sql: ${TABLE}.retail_price ;;
+    drill_fields: [id, products.retail_cost]
   }
 }

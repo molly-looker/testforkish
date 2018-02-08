@@ -21,10 +21,18 @@ view: user_data {
     type: number
     # hidden: yes
     sql: ${TABLE}.user_id ;;
+    drill_fields: [users.first_name, users.last_name]
   }
 
   measure: count {
     type: count
-    drill_fields: [id, users.last_name, users.first_name, users.id]
+    drill_fields: [id, users.first_name, users.last_name, users.id]
+  }
+
+  measure: average_max {
+    label: "Average Max Orders"
+    description: "Average Max Orders per User"
+    type:  average
+    sql:${TABLE}.max_num_orders ;;
   }
 }
