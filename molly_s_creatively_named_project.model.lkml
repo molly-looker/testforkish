@@ -10,6 +10,7 @@ datagroup: molly_datagroup {
 
 explore: users {
   persist_with: molly_datagroup
+  view_label: "California Users"
   fields: [ALL_FIELDS*, -user_data.id]
   always_filter: {
     filters: {
@@ -21,6 +22,14 @@ explore: users {
     view_label: "extra user shiz"
     type: inner
     sql_on: ${users.id} = ${user_data.user_id};;
+    relationship: one_to_one
+
+  }
+
+  join: allusers {
+    from:  users
+    view_label: "All Users"
+    sql_on: ${users.id} = ${user_data.user_id} ;;
     relationship: one_to_one
 
   }
@@ -41,16 +50,9 @@ explore: orders {
 }
 
 explore: inventory_items {
-  join: womens_products {
+  join: products {
     from: products
-    sql_on:  ${inventory_items.product_id} = ${womens_products.id} AND
-              ${womens_products.department} = "Women" ;;
+    sql_on:  ${inventory_items.product_id} = ${products.id} ;;
     relationship: many_to_one
-  }
-  join: mens_products {
-    from: products
-    sql_on:  ${inventory_items.product_id} = ${womens_products.id} AND ${mens_products.department} = "Men" ;;
-    relationship: many_to_one
-
   }
 }

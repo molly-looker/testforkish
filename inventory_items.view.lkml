@@ -60,39 +60,21 @@ view: inventory_items {
     drill_fields: [products.item_name]
   }
 
-  measure: count_brands_women {
-    type:  count_distinct
-    sql: womens_products.brands ;;
-  }
 
-  measure: count_brands_men {
-    type:  count_distinct
-    sql: mens_products.brands ;;
-  }
-
-
-  measure: count_CK_womens {
+  measure: count_CK {
     type: count
     filters: {
-      field: womens_products.brand
+      field: products.brand
       value: "Calvin Klein Jeans"
   }
     drill_fields: [products.product_id, products.item_name]
 }
 
-  measure: count_CK_mens {
-    type: count
-    filters: {
-      field: mens_products.brand
-      value: "Calvin Klein Jeans"
-    }
-    drill_fields: [products.product_id, products.item_name]
-  }
 
 
   measure: percentCK {
     type:  percent_of_total
-    sql:  (${count_CK_womens}+ ${count_CK_mens})/${count} ;;
-    drill_fields: [count, count_CK_mens, count_CK_womens]
+    sql:  ${count_CK}/${count} ;;
+    drill_fields: [count, count_CK]
     }
 }
