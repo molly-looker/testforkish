@@ -22,18 +22,6 @@ view: products {
     sql: ${TABLE}.department ;;
   }
 
-  dimension: dept {
-    label: "Department by Gender"
-    description: "Products by Department (Gender)"
-    case: {
-      when: {
-        sql: ${TABLE}.department="Women";;
-        label: "Lady Clothes"
-      }
-      else: "Dude Clothes"
-    }
-  }
-
   dimension: item_name {
     type: string
     sql: ${TABLE}.item_name ;;

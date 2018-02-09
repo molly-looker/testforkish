@@ -26,6 +26,25 @@ view: inventory_items {
     drill_fields: [product_id, cost]
   }
 
+
+  dimension: expensive {
+    label: "Cash Money"
+    description: "How much will your wallet hurt after this purchase?"
+    type:  string
+    case: {
+      when: {
+        sql: ${TABLE}.cost>=100;;
+        label:"Ouch"
+        }
+
+      when: {
+        sql: ${TABLE}.cost<100 and ${TABLE}.cost>=50 ;;
+        label: "No Drinks this Week"
+      }
+      else: "I can haz all the things"
+        }
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
