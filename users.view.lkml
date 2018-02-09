@@ -69,8 +69,8 @@ view: users {
   }
 
   dimension: zip {
-    type: zipcode
-    sql: ${TABLE}.zip ;;
+     type:  zipcode
+      sql: lpad(${TABLE}.zip, 5, 0);;
   }
 
   measure: count {
