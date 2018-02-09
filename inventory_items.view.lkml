@@ -23,6 +23,7 @@ view: inventory_items {
     tiers: [0, 10, 30, 50, 80, 100]
     style: relational
     sql: ${cost} ;;
+    value_format_name: usd
     drill_fields: [product_id, cost]
   }
 
@@ -94,6 +95,7 @@ view: inventory_items {
   measure: percentCK {
     type:  percent_of_total
     sql:  ${count_CK}/${count} ;;
+    value_format_name: percent_0
     drill_fields: [count, count_CK]
     }
 }
