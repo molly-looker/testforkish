@@ -7,6 +7,11 @@ view: products {
     sql: ${TABLE}.id ;;
   }
 
+  dimension: id2 {
+    type: number
+    sql: ${TABLE}.id ;;
+  }
+
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
