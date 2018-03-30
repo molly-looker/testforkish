@@ -1,10 +1,7 @@
 view: inventory_items {
   sql_table_name: demo_db.inventory_items ;;
 
-  dimension: id {
-    primary_key: yes
-    type: number
-    sql: ${TABLE}.id ;;
+  dimension: id {primary_key: yes  type: number   sql: ${TABLE}.id ;;
   }
 
   dimension: product_id {
@@ -75,6 +72,8 @@ view: inventory_items {
     sql: ${TABLE}.sold_at ;;
   }
 
+
+
   measure: count {
     type: count
     drill_fields: [products.item_name]
@@ -91,11 +90,7 @@ view: inventory_items {
 }
 
 
-
-  measure: percentCK {
-    type:  percent_of_total
-    sql:  ${count_CK}/${count} ;;
-    value_format_name: percent_0
-    drill_fields: [count, count_CK]
-    }
+  set: details {
+    fields: [id, product_id]
+  }
 }

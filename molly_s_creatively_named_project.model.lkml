@@ -37,7 +37,7 @@ explore: users {
 }
 
 explore: orders {
-  sql_always_where: ${created_date} >= '2017-01-01';;
+# sql_always_where: ${created_date} = ${2daysago};;
   join: users {
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
@@ -55,4 +55,21 @@ explore: inventory_items {
     sql_on:  ${inventory_items.product_id} = ${products.id} ;;
     relationship: many_to_one
   }
+}
+
+
+explore: error_trends {
+  from: products
+  view_name: products
+  description: "Investigation view. Used to see the 10 events surrounding one particular event pivoted."
+  hidden: yes
+
+
+  }
+
+
+explore: extends_test {
+  extends: [error_trends]
+  from: products
+  view_name: products
 }

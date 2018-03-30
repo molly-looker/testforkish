@@ -7,8 +7,7 @@ view: products {
     sql: ${TABLE}.id ;;
   }
 
-  dimension: id2 {
-    type: number
+  dimension: id2 { type: number
     sql: ${TABLE}.id ;;
   }
 
@@ -22,53 +21,49 @@ view: products {
     sql: ${TABLE}.category ;;
   }
 
-  dimension: department {
-    type: string
-    sql: ${TABLE}.department ;;
-  }
+  dimension: category2 {
+    sql: ${TABLE}.category ;;
+    html:
+      {{ value }}
+      [<a href="inventory_items?fields=inventory_items.details*&f[products.category2]={{ value }}">Photos</a>] ;;
 
-  dimension: item_name {
-    type: string
-    sql: ${TABLE}.item_name ;;
-  }
+    }
 
-  dimension: rank {
-    type: number
-    sql: ${TABLE}.rank ;;
-  }
+    dimension: department {
+      type: string
+      sql: ${TABLE}.department ;;
+    }
 
-  dimension: retail_price {
-    type: number
-    sql: ${TABLE}.retail_price ;;
-  }
+    dimension: item_name {
+      type: string
+      sql: ${TABLE}.item_name ;;
+    }
 
-  dimension: sku {
-    type: string
-    sql: ${TABLE}.sku ;;
-  }
+    dimension: rank {
+      type: number
+      sql: ${TABLE}.rank ;;
+    }
 
-  measure: count {
-    type: count
-    drill_fields: [id, item_name, inventory_items.count]
-  }
+    dimension: retail_price {
+      type: number
+      sql: ${TABLE}.retail_price ;;
+    }
 
-  measure: sum_retail {
-    label: "Sum Retail Cost"
-    description: "Sum of Retail Cost Per Inventory Item"
-    type:  sum_distinct
-    sql:  ${TABLE}.retail_cost ;;
-    drill_fields: [id, products.retail_cost]
-  }
+    dimension: sku {
+      type: string
+      sql: ${TABLE}.sku ;;
+    }
 
-  measure: min_retail {
-    type:  min
-    sql:  ${TABLE}.retail_cost ;;
-    drill_fields: [id, products.retail_cost]
-  }
+    measure: count {
+      type: count
+      drill_fields: [id, item_name]
+    }
 
-  measure: avg_retail {
-    type:  average
-    sql: ${TABLE}.retail_price ;;
-    drill_fields: [id, products.retail_cost]
+
+    set: detail {
+      fields: [department
+        ,rank
+        ,sku
+        ,inventory_items.product_id]
+    }
   }
-}

@@ -1,6 +1,7 @@
 view: orders {
   sql_table_name: demo_db.orders ;;
 
+
   dimension: id {
     primary_key: yes
     type: number
@@ -41,5 +42,10 @@ view: orders {
   measure: count {
     type: count
     drill_fields: [id, users.name, order_items.count]
+  }
+
+  measure: hardcode {
+    type: number
+    sql:  '0.03' ;;
   }
 }
