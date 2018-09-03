@@ -4,7 +4,7 @@ connection: "thelook"
 include: "*.view"
 
 # include all the dashboards
-include: "*.dashboard"
+
 
 datagroup: test_forkish_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
