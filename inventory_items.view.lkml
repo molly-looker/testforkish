@@ -20,7 +20,7 @@ view: inventory_items {
     tiers: [0, 10, 30, 50, 80, 100]
     style: relational
     sql: ${cost} ;;
-    value_format_name: usd
+    value_format_name: usd_0
     drill_fields: [product_id, cost]
   }
 
