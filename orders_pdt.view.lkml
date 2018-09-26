@@ -1,4 +1,4 @@
-view: order_pdt {
+view: orders_pdt {
   derived_table: {
   sql: select * from demo_db.orders ;;
   }
