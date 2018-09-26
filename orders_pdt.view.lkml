@@ -1,5 +1,7 @@
-view: orders {
-  sql_table_name: demo_db.orders ;;
+view: order_pdt {
+  derived_table: {
+  sql: select * from demo_db.orders ;;
+  }
 
   dimension: id {
     primary_key: yes
@@ -28,11 +30,11 @@ view: orders {
 
 
 
-  html: {% if value == "" %}
-  <div style="color: black; background-color: red; font-size:100%; text-align:center">{{ rendered_value }}</div>
-  {% else %}
-  {{ rendered_value }}
-  {% endif %} ;;
+    html: {% if value == "" %}
+        <div style="color: black; background-color: red; font-size:100%; text-align:center">{{ rendered_value }}</div>
+        {% else %}
+        {{ rendered_value }}
+        {% endif %} ;;
   }
 
   parameter: statusparam {

@@ -20,6 +20,7 @@ view: products {
   dimension: department {
     type: string
     sql: ${TABLE}.department ;;
+
   }
 
   dimension: item_name {
