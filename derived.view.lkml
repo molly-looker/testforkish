@@ -1,6 +1,6 @@
 view: derived {
   derived_table: {
-    sql_trigger_value: select ${derived2.lifetime_orders} ;;
+
     sql: SELECT
         user_id as user_id
         , COUNT(*) as lifetime_orders

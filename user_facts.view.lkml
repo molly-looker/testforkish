@@ -13,8 +13,7 @@ view: user_facts {
           GROUP BY o.user_id
    ;;
 
-    sql_trigger_value: SELECT NOW();;
-    indexes: ["user_id"]
+
        }
 
 
