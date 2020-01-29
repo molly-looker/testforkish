@@ -1,4 +1,4 @@
-view: derived {
+view: derived_des_aleks_pdt {
   derived_table: {
 
     sql: SELECT
