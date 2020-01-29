@@ -8,6 +8,8 @@ view: derived {
       FROM orders
       GROUP BY user_id
       ;;
+      sql_trigger_value: Select Max(today) ;;
+      persist_for: "24 hours"
   }
 #
   # Define your dimensions and measures here, like this:
